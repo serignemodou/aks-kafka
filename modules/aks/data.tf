@@ -37,12 +37,12 @@ data "azurerm_virtual_network" "vnet_dev" {
 
 data "azurerm_virtual_network" "vnet_preprod" {
   resource_group_name = "RG-KUB-PREPROD"
-  name                = "VNET-KUB-PRPEPROD"
+  name                = "VNET-KUB-PREPROD-NEW"
 }
 
 data "azurerm_virtual_network" "vnet_prod" {
   resource_group_name = "RG-KUB-PROD"
-  name                = "VNET-KUB-PROD"
+  name                = "VNET-KUB-PROD-NEW"
 }
 
 #####################################################################
@@ -56,13 +56,13 @@ data "azurerm_subnet" "kub-vnet-dev" {
 }
 
 data "azurerm_subnet" "kub-vnet-preprod" {
-  virtual_network_name = "VNET-KUB-PRPEPROD"
+  virtual_network_name = "VNET-KUB-PREPROD-NEW"
   name                 = "default"
   resource_group_name  = "RG-KUB-PREPROD"
 }
 
 data "azurerm_subnet" "kub-vnet-prod" {
-  virtual_network_name = "VNET-KUB-PROD"
+  virtual_network_name = "VNET-KUB-PROD-NEW"
   name                 = "default"
   resource_group_name  = "RG-KUB-PROD"
 }

@@ -405,3 +405,8 @@ variable "node_pools" {
     #node_public_ip_enabled= bool
   }))
 }
+
+variable "temporary_name_for_rotation" {
+  description = "The temporary node pool"
+  default = "temppool"
+}

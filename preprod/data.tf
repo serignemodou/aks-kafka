@@ -19,14 +19,14 @@ data "azuread_group" "admin-group-preprod" {
 #####################################################################
 data "azurerm_virtual_network" "vnet_preprod" {
   resource_group_name = "RG-KUB-PREPROD"
-  name                = "VNET-KUB-PRPEPROD"
+  name                = "VNET-KUB-PREPROD-NEW"
 }
 
 #####################################################################
 # Retrieve SubnetID of the Kub PREPROD
 #####################################################################
 data "azurerm_subnet" "subnet_preprod" {
-  virtual_network_name = "VNET-KUB-PRPEPROD"
+  virtual_network_name = "VNET-KUB-PREPROD-NEW"
   name                 = "default"
   resource_group_name  = "RG-KUB-PREPROD"
 }

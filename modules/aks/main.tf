@@ -112,6 +112,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
       host_encryption_enabled = var.host_encryption_enabled
       os_disk_type            = var.os_disk_type
       os_sku                  = var.os_sku
+      temporary_name_for_rotation = var.temporary_name_for_rotation
 
       upgrade_settings {
           max_surge                     = var.agents_pool_max_surge

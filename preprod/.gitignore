@@ -8,8 +8,8 @@ preprod/.terraform.lock.hcl
 preprod/*.tfstate
 
 
-.terraform.lock.hcl
-terraform.tfstate.backup
-terraform.tfstate
-.terraform.lock.hcl
+#.terraform.lock.hcl
+#terraform.tfstate.backup
+#terraform.tfstate
+#.terraform.lock.hcl
 .terraform/

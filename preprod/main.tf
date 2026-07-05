@@ -54,19 +54,20 @@ module "aks" {
   # AKS default nodepool
   agents_pool_name                  = "defaultpool"
   orchestrator_version              = "1.33.5"
-  agents_count                      = 2
-  agents_size                       = "Standard_D4ds_v5" #"Standard_D4s_v5"
+  #agents_count                      = 2
+  agents_size                       = "Standard_D4as_v5"
   os_disk_size_gb                   = 50
   vnet_subnet_id                    = data.azurerm_subnet.subnet_preprod.id
   auto_scaling_enabled              = true
-  agents_max_count                  = 2
-  agents_min_count                  = 1
+  agents_max_count                  = 3
+  agents_min_count                  = 2
   availability_zones                = [ "1", "2", "3" ]
   agents_type                       = "VirtualMachineScaleSets"
   agents_max_pods                   = 110
   host_encryption_enabled           = false #Subscription does not enable EncryptionAtHost."
   os_disk_type                      = "Managed"
   os_sku                            = "Ubuntu"
+  temporary_name_for_rotation = "temppool"
   agents_labels = {
     "workload"      = "system",
     "environment"   = "preprod"
@@ -101,16 +102,16 @@ module "aks" {
   network_plugin        = "azure"
   network_plugin_mode   = "overlay"
   #network_policy        = ""
-  outbound_type         =  "userDefinedRouting" #"loadBalancer"
+  outbound_type         =  "loadBalancer" #"userDefinedRouting"
   pod_cidr              = "188.11.0.0/16"
   service_cidr          = "198.11.0.0/16"
 
   node_pools = {
     apppool = {
-        vm_size                 = "Standard_D4ds_v5" #"Standard_D8s_v5"
+        vm_size                 = "Standard_D4ds_v4" #"Standard_D8ds_v4"
         name                    = "app"
         node_count              = 3
-        max_count               = 4
+        max_count               = 3
         min_count               = 2
         max_pod                 = 110
         deploy_temporary_pool   = false
@@ -122,7 +123,7 @@ module "aks" {
         labels = {
           "type"        = "app",
           "environment" = "preprod"
-          "role"        = "app"
+          "role"        = "kafka"
         }
     }
   }

@@ -54,19 +54,20 @@ module "aks" {
   # AKS default nodepool
   agents_pool_name                  = "defaultpool"
   orchestrator_version              = "1.33.5"
-  agents_count                      = 2
-  agents_size                       = "Standard_D4s_v5"
+  #agents_count                      = 3
+  agents_size                       = "Standard_D4as_v5" #"Standard_D4ds_v4"
   os_disk_size_gb                   = 50
   vnet_subnet_id                    = data.azurerm_subnet.subnet_prod.id
   auto_scaling_enabled              = true
-  agents_max_count                  = 2
-  agents_min_count                  = 1
+  agents_max_count                  = 3
+  agents_min_count                  = 2
   availability_zones                = [ "1", "2", "3" ]
   agents_type                       = "VirtualMachineScaleSets"
   agents_max_pods                   = 110
   host_encryption_enabled           = false #Subscription does not enable EncryptionAtHost."
   os_disk_type                      = "Managed"
   os_sku                            = "Ubuntu"
+  temporary_name_for_rotation = "temppool"
   #ip_ranges                         = [ "212.32.90.34" ]
   agents_labels = {
     "workload"      = "system",
@@ -101,16 +102,16 @@ module "aks" {
   # aks network
   network_plugin        = "azure"
   network_plugin_mode   = "overlay"
-  outbound_type         =  "loadBalancer" #"userDefinedRouting"
+  outbound_type         = "loadBalancer" #"userDefinedRouting"
   pod_cidr              = "188.12.0.0/16"
   service_cidr          = "198.12.0.0/16"
 
   node_pools = {
     apppool = {
-        vm_size                 = "Standard_D8s_v5"
+        vm_size                 = "Standard_D8ds_v5"
         name                    = "app"
-        node_count              = 7
-        max_count               = 10
+        node_count              = 3
+        max_count               = 3
         min_count               = 2
         max_pod                 = 110
         deploy_temporary_pool   = false
@@ -122,7 +123,7 @@ module "aks" {
         labels = {
           "type"        = "app",
           "environment" = "prod"
-          "role"        = "app"
+          "role"        = "kafka"
         }
     }
   }
